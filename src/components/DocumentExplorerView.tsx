@@ -14,6 +14,7 @@ import {
   Hash
 } from 'lucide-react';
 import { data, sessionMap, DocumentUnit, SourceUnit } from '../lib/history-search';
+import { FormattedSlideContent } from './FormattedSlideContent';
 
 interface DocumentExplorerViewProps {
   initialSession?: number;
@@ -304,14 +305,16 @@ export const DocumentExplorerView: React.FC<DocumentExplorerViewProps> = ({
                 {/* Raw Extracted Slide Content */}
                 <div>
                   <div className="text-xs font-bold uppercase tracking-wider text-[#6B7280] mb-2 flex items-center justify-between">
-                    <span>Toàn văn lớp chữ trích xuất</span>
+                    <span>Nội dung chi tiết slide</span>
                     <span className="text-xs font-normal lowercase bg-[#F4EFE6] px-2.5 py-0.5 rounded text-[#4B5563]">
-                      Chưa OCR lại ảnh
+                      Tài liệu gốc
                     </span>
                   </div>
-                  <div className="bg-[#FAF8F5] text-[#1F2937] p-5 rounded-xl border border-[#E7DFD5] raw-slide-content whitespace-pre-wrap leading-relaxed-vn shadow-inner text-sm sm:text-base">
-                    {activeDoc.text || '(Slide không có văn bản hoặc chỉ chứa ảnh sơ đồ)'}
-                  </div>
+                  <FormattedSlideContent 
+                    rawText={activeDoc.text}
+                    unitLabel={activeDoc.unitType === 'slide' ? 'Slide' : 'Trang'}
+                    unitNumber={activeDoc.unitNumber}
+                  />
                 </div>
 
                 {/* Date mentions on this slide */}

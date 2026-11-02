@@ -18,6 +18,7 @@ import {
   BookOpen
 } from 'lucide-react';
 import { EnrichedEvent, formatEventDate } from '../lib/history-search';
+import { FormattedSlideContent } from './FormattedSlideContent';
 
 interface EventDetailModalProps {
   event: EnrichedEvent | null;
@@ -212,16 +213,19 @@ export const EventDetailModal: React.FC<EventDetailModalProps> = ({
           <div>
             <div className="flex items-center justify-between mb-2.5">
               <div className="flex items-center text-[#374151] font-heading font-bold text-sm sm:text-base">
-                <FileText className="w-4 h-4 mr-2" />
-                <span>Nội dung lớp chữ trích xuất nguyên văn slide ({unitLabel} {unitNum})</span>
+                <FileText className="w-4 h-4 mr-2 text-crimson-primary" />
+                <span>Nội dung chi tiết tài liệu gốc ({unitLabel} {unitNum})</span>
               </div>
               <span className="text-xs text-[#6B7280] bg-[#F4EFE6] px-2.5 py-1 rounded font-medium">
                 Văn bản gốc
               </span>
             </div>
-            <div className="bg-[#FAF8F5] text-[#1F2937] p-5 rounded-xl border border-[#E7DFD5] raw-slide-content whitespace-pre-wrap shadow-inner">
-              {event.sourceText}
-            </div>
+            
+            <FormattedSlideContent 
+              rawText={event.sourceText}
+              unitLabel={unitLabel}
+              unitNumber={unitNum}
+            />
           </div>
 
           {/* Section 8: Sự kiện liên quan */}
